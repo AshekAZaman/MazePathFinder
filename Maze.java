@@ -7,7 +7,42 @@ public class Maze {
     private Position mazeArray[][];
     private int row, col;
 
-    public Maze(String fileName) throws IOException {
+    public Maze(String fileName) {
+
+        /**
+         * OBJECTIVE The Maze constructor reads the input file, create a 2D array of the
+         * appropriate size, and then fill the array using the setMaze method
+         */
+        try {
+            setMaze(fileName);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        System.out.println("The initial maze is:");
+        printMaze();
+
+    }// Maze constructor
+
+    private void printMaze() {
+        for (int i = 0; i < mazeArray.length; i++) {
+            System.out.println();
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                System.out.print(mazeArray[i][j].symbol());
+            }
+            System.out.println();
+        }
+    }
+
+    private void setMaze(String fileName) throws IOException {
+
+        /**
+         * OBJECTIVE This method reads the file name using the parameter. It then
+         * extracts the information for the row and column number and puts it into the
+         * mazeArray to make the maze.
+         * 
+         */
 
         FileReader fileRdr;
         fileRdr = new FileReader(fileName);
@@ -67,7 +102,22 @@ public class Maze {
 
         inFile.close();
 
-    }// Maze constructor
+    }// setMaze
+
+    public void resetMaze() {
+
+        /**
+         * OBJECTIVE This method resets all the positions in the maze to unvisited for
+         * it to be used again to try different search
+         */
+
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                mazeArray[i][j].setIsVisted(false);
+            }
+        }
+
+    }// resetMaze
 
 }
 // Maze class
