@@ -129,7 +129,7 @@ public class Maze {
 
         /**
          * OBJECTIVE This method find the start position in the array for further
-         * process.
+         * process and return the coordinates.
          * 
          */
 
@@ -153,7 +153,7 @@ public class Maze {
 
         /**
          * OBJECTIVE This method finds the finish position in the array for further
-         * process.
+         * process and return the coordinates.
          * 
          */
 
