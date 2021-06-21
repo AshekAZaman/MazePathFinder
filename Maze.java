@@ -26,6 +26,12 @@ public class Maze {
     }// Maze constructor
 
     private void printMaze() {
+
+        /**
+         * OBJECTIVE Prints each of the the elements in the mazeArray
+         * 
+         */
+
         for (int i = 0; i < mazeArray.length; i++) {
             System.out.println();
             for (int j = 0; j < mazeArray[i].length; j++) {
@@ -120,6 +126,13 @@ public class Maze {
     }// resetMaze
 
     private int[] findStartPosition() {
+
+        /**
+         * OBJECTIVE This method find the start position in the array for further
+         * process.
+         * 
+         */
+
         int[] startPositon = new int[2];
 
         for (int i = 0; i < mazeArray.length; i++) {
@@ -137,6 +150,13 @@ public class Maze {
     }// findStartPosition
 
     private int[] findFinishPosition() {
+
+        /**
+         * OBJECTIVE This method finds the finish position in the array for further
+         * process.
+         * 
+         */
+
         int[] finishPosition = new int[2];
 
         for (int i = 0; i < mazeArray.length; i++) {
