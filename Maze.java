@@ -33,7 +33,7 @@ public class Maze {
             }
             System.out.println();
         }
-    }
+    }// printMaze
 
     private void setMaze(String fileName) throws IOException {
 
@@ -118,6 +118,40 @@ public class Maze {
         }
 
     }// resetMaze
+
+    private int[] findStartPosition() {
+        int[] startPositon = new int[2];
+
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                if (mazeArray[i][j].symbol().equals("S")) {
+                    startPositon[0] = i;
+                    startPositon[1] = j;
+                    break;
+                }
+            }
+        }
+
+        return startPositon;
+
+    }// findStartPosition
+
+    private int[] findFinishPosition() {
+        int[] finishPosition = new int[2];
+
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                if (mazeArray[i][j].symbol().equals("F")) {
+                    finishPosition[0] = i;
+                    finishPosition[1] = j;
+                    break;
+                }
+            }
+        }
+
+        return finishPosition;
+
+    }// findFinishPosition
 
 }
 // Maze class
