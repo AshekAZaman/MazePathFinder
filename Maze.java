@@ -129,7 +129,6 @@ public class Maze {
         for (int i = 0; i < mazeArray.length; i++) {
             for (int j = 0; j < mazeArray[i].length; j++) {
                 mazeArray[i][j].setIsVisted(false);
-                // mazeArray[i][j].setPrevious(null);
             }
         }
 
@@ -138,8 +137,8 @@ public class Maze {
     public void resetPreviousMaze() {
 
         /**
-         * OBJECTIVE This method resets all the positions in the maze to unvisited for
-         * it to be used again to try different search
+         * OBJECTIVE This method resets all the position's refPrevious in the maze to
+         * false for it to be used again to try different search
          */
 
         for (int i = 0; i < mazeArray.length; i++) {
@@ -199,6 +198,11 @@ public class Maze {
     }// findFinishPosition
 
     public void solveByQueue() {
+
+        /**
+         * OBJECTIVE This method uses the data structure queue inorder to find the path
+         * from start to finish.
+         */
 
         resetMaze();
         resetPreviousMaze();
@@ -275,6 +279,11 @@ public class Maze {
 
     public void solveByStack() {
 
+        /**
+         * OBJECTIVE This method uses the data structure stack inorder to find the path
+         * from start to finish.
+         */
+
         resetMaze();
         resetPreviousMaze();
 
@@ -350,6 +359,12 @@ public class Maze {
     }// solveByStack
 
     private boolean isValid(Position arrayMaze[][], int row, int col) {
+
+        /**
+         * OBJECTIVE This method checks if the positions are valid for checking the
+         * path.
+         * 
+         */
 
         return (row >= 0) && (row < arrayMaze.length) && (col >= 0) && (col < arrayMaze[row].length);
     }
