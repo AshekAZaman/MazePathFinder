@@ -6,6 +6,12 @@ public class Maze {
 
     private Position mazeArray[][];
     private int row, col;
+    private Stack mazeStack;
+    private Queue mazeQueue;
+
+    // row and column number which represents the neighbours
+    private int rowNum[] = { -1, 0, 0, 1 };
+    private int colNum[] = { 0, -1, 1, 0 };
 
     public Maze(String fileName) {
 
@@ -19,6 +25,9 @@ public class Maze {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        mazeStack = new Stack();
+        mazeQueue = new Queue();
 
         System.out.println("The initial maze is:");
         printMaze();
@@ -120,6 +129,22 @@ public class Maze {
         for (int i = 0; i < mazeArray.length; i++) {
             for (int j = 0; j < mazeArray[i].length; j++) {
                 mazeArray[i][j].setIsVisted(false);
+                // mazeArray[i][j].setPrevious(null);
+            }
+        }
+
+    }// resetMaze
+
+    public void resetPreviousMaze() {
+
+        /**
+         * OBJECTIVE This method resets all the positions in the maze to unvisited for
+         * it to be used again to try different search
+         */
+
+        for (int i = 0; i < mazeArray.length; i++) {
+            for (int j = 0; j < mazeArray[i].length; j++) {
+                mazeArray[i][j].setPrevious(null);
             }
         }
 
@@ -173,5 +198,160 @@ public class Maze {
 
     }// findFinishPosition
 
+    public void solveByQueue() {
+
+        resetMaze();
+        resetPreviousMaze();
+
+        System.out.println("The path found using a queue is:");
+
+        String pathMaze[] = new String[10];
+
+        int startRow = findStartPosition()[0];
+        int startCol = findStartPosition()[1];
+
+        int finishRow = findFinishPosition()[0];
+        int finishCol = findFinishPosition()[1];
+
+        int currentRow = startRow;
+        int currentCol = startCol;
+
+        mazeQueue.enqueue(mazeArray[currentRow][currentCol]);
+        mazeArray[currentRow][currentCol].setIsVisted(true);
+
+        boolean finishFound = false;
+
+        while (mazeQueue.isEmpty() == false && finishFound == false) {
+
+            Position currentPosition = mazeQueue.front();
+            currentRow = currentPosition.getRow();
+            currentCol = currentPosition.getCol();
+
+            if (currentRow == finishRow && currentCol == finishCol) {
+
+                finishFound = true;
+            }
+            mazeQueue.dequeue();
+            for (int i = 0; i < 4; i++) {
+
+                if (isValid(mazeArray, currentRow + rowNum[i], currentCol + colNum[i])
+                        && !mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].isVisted()
+                        && !mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].symbol().equals("#")) {
+
+                    mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].setIsVisted(true);
+                    mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]]
+                            .setPrevious(mazeArray[currentRow][currentCol]);
+                    mazeQueue.enqueue(mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]]);
+
+                }
+
+            }
+
+        }
+
+        resetMaze();
+
+        Position temp = mazeArray[finishRow][finishCol];
+        int counter = 0;
+        while (temp != mazeArray[startRow][startCol]) {
+            pathMaze[counter] = temp.coordinates();
+            temp.setIsVisted(true);
+            temp = temp.getPrevious();
+            counter++;
+        }
+
+        pathMaze[counter++] = mazeArray[startRow][startCol].coordinates();
+
+        printMaze();
+
+        System.out.print("Path from start to finish is: ");
+        for (int i = pathMaze.length - 1; i >= 0; i--) {
+            if (pathMaze[i] != null) {
+                System.out.print(pathMaze[i] + " ");
+            }
+        }
+
+    }// solveByQueue
+
+    public void solveByStack() {
+
+        resetMaze();
+        resetPreviousMaze();
+
+        System.out.println("The path found using a stack is:");
+
+        String pathMaze[] = new String[10];
+
+        int startRow = findStartPosition()[0];
+        int startCol = findStartPosition()[1];
+
+        int finishRow = findFinishPosition()[0];
+        int finishCol = findFinishPosition()[1];
+
+        int currentRow = startRow;
+        int currentCol = startCol;
+
+        mazeStack.push(mazeArray[currentRow][currentCol], currentRow, currentCol);
+        mazeArray[currentRow][currentCol].setIsVisted(true);
+
+        boolean finishFound = false;
+
+        while (mazeStack.isEmpty() == false && finishFound == false) {
+
+            Node currentPosition = mazeStack.top();
+            currentRow = currentPosition.getRow();
+            currentCol = currentPosition.getCol();
+
+            if (currentRow == finishRow && currentCol == finishCol) {
+
+                finishFound = true;
+            }
+            mazeStack.pop();
+            for (int i = 0; i < 4; i++) {
+
+                if (isValid(mazeArray, currentRow + rowNum[i], currentCol + colNum[i])
+                        && !mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].isVisted()
+                        && !mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].symbol().equals("#")) {
+
+                    mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]].setIsVisted(true);
+                    mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]]
+                            .setPrevious(mazeArray[currentRow][currentCol]);
+                    mazeStack.push(mazeArray[currentRow + rowNum[i]][currentCol + colNum[i]], currentRow + rowNum[i],
+                            currentCol + colNum[i]);
+
+                }
+
+            }
+
+        }
+
+        resetMaze();
+
+        Position temp = mazeArray[finishRow][finishCol];
+        int counter = 0;
+        while (temp != mazeArray[startRow][startCol]) {
+            pathMaze[counter] = temp.coordinates();
+            temp.setIsVisted(true);
+            temp = temp.getPrevious();
+            counter++;
+        }
+
+        pathMaze[counter++] = mazeArray[startRow][startCol].coordinates();
+
+        printMaze();
+
+        System.out.print("Path from start to finish is: ");
+        for (int i = pathMaze.length - 1; i >= 0; i--) {
+            if (pathMaze[i] != null) {
+                System.out.print(pathMaze[i] + " ");
+            }
+        }
+
+    }// solveByStack
+
+    private boolean isValid(Position arrayMaze[][], int row, int col) {
+
+        return (row >= 0) && (row < arrayMaze.length) && (col >= 0) && (col < arrayMaze[row].length);
+    }
 }
 // Maze class

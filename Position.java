@@ -23,6 +23,13 @@ public class Position {
 
     }// Position constructor
 
+    public Position getPrevious() {
+
+        // NOTE Getter for refPrevious
+
+        return refPrevious;
+    }
+
     public void setPrevious(Position refPrevious) {
 
         // NOTE Setter for refPrevious
@@ -55,19 +62,36 @@ public class Position {
          * use when displaying the maze. It returns the appropriate symbol.
          */
 
-        String symbol = "";
+        String symbol = new String();
 
-        if (this.typeOfSquare == SquareType.PATH) {
-            symbol += ".";
+        if (this.typeOfSquare == SquareType.PATH && this.isVisted == false) {
+            symbol = ".";
         } else if (this.typeOfSquare == SquareType.WALL) {
-            symbol += "#";
+            symbol = "#";
         } else if (this.typeOfSquare == SquareType.START) {
-            symbol += "S";
+            symbol = "S";
         } else if (this.typeOfSquare == SquareType.FINISH) {
-            symbol += "F";
+            symbol = "F";
+        }
+
+        if (this.isVisted == true && (this.typeOfSquare != SquareType.START) && (this.typeOfSquare != SquareType.FINISH)
+                && (this.typeOfSquare != SquareType.WALL)) {
+            symbol = "*";
         }
 
         return symbol;
+    }
+
+    public boolean isVisted() {
+        return this.isVisted;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 
 }// Position class

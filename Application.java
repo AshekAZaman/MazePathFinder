@@ -15,6 +15,10 @@ public class Application {
 
         scanner.close();
 
+        inputMaze.solveByStack();
+        System.out.println("");
+        inputMaze.solveByQueue();
+
         System.out.println("\nProcessing terminated normally.");
 
     }// main

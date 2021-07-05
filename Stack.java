@@ -9,27 +9,30 @@ public class Stack {
     public Stack() {
         this.top = null;
         this.size = 0;
+
     }// Stack constructor
 
-    public void push(Position data) {
+    public void push(Position data, int row, int col) {
 
         /**
          * OBJECTIVE Inserts a data at the very top of the stack and moves the rest of
          * the data by one position
          */
         Node temp = new Node();
+        temp.setRow(row);
+        temp.setCol(col);
         temp.setData(data);
         temp.setNext(top);
         top = temp;
         size++;
     }// push
 
-    public void pop() {
+    public Node pop() {
 
         /**
          * OBJECTIVE Removes the very first element of the stack
          */
-        top = (top).getNext();
+        return (top = (top).getNext());
     }// pop
 
     public boolean isEmpty() {
