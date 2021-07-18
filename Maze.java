@@ -4,6 +4,23 @@ import java.io.IOException;
 
 public class Maze {
 
+    /**
+     * ABOUT A maze is a path or collection of paths, typically from an entrance to
+     * a goal. The word is used to refer both to branching tour puzzles through
+     * which the solver must find a route, and to simpler non-branching
+     * ("unicursal") patterns that lead unambiguously through a convoluted layout to
+     * a goal. In this class we arrange the maze using a 2D array and record its
+     * path.
+     * 
+     * Each position in the maze will be one of the following: • a path (an open
+     * space you can walk on), represented by . (period) • a wall (a blocked space
+     * that you can not step on), represented by # (hash mark) • a starting point,
+     * represented by S. • a finish line, represented by F
+     * 
+     * If a path has been found and the maze is displayed, the path from start to
+     * finish should be marked with * (asterisk).
+     */
+
     private Position mazeArray[][];
     private int row, col;
     private Stack mazeStack;
