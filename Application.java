@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
 public class Application {
+
+    /**
+     * ABOUT This class runs the main method where the maze is recorded from the
+     * input file and solved using stack and queue.
+     * 
+     */
     public static void main(String[] args) {
 
         System.out.println("Please enter the input file name (.txt only):\n");
