@@ -1,4 +1,4 @@
-#MazePathFinder
+# MazePathFinder
 
 This program will read a maze from a file, and attempt to find a path through the maze twice. One attempt will use a stack to store the positions visited in the maze, and the other attempt will use a queue to store the positions visited in the maze.
 
