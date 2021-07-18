@@ -19,6 +19,7 @@ public class Maze {
      * 
      * If a path has been found and the maze is displayed, the path from start to
      * finish should be marked with * (asterisk).
+     * 
      */
 
     private Position mazeArray[][];
