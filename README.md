@@ -1,4 +1,4 @@
-#Find a Path Through a Maze
+#MazePathFinder
 
 This program will read a maze from a file, and attempt to find a path through the maze twice. One attempt will use a stack to store the positions visited in the maze, and the other attempt will use a queue to store the positions visited in the maze.
 
@@ -18,7 +18,7 @@ Each position in the maze will be one of the following:
 
 CHECK out sample1.txt for a better idea
 ________________________________________________________________________________________________________________________
-2.COMPILING THE FILE
+2. COMPILING THE FILE
 
 The main class is Application.java COMPILE it using the following command in the command line
 
